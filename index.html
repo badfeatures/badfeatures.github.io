@@ -36,7 +36,8 @@
 
         function connectBLE(){
             //BLE setup. Connect and get service/characteristic notifications
-            navigator.bluetooth.requestDevice({ filters: [{ services: '78adb061-470e-405d-a44d-817e559c8839' }] })
+            console.log('Calling requestDevice.');
+            navigator.bluetooth.requestDevice()
             .then(device => device.gatt.connect())
             .then(server => server.getPrimaryService('service))
             .then(service => service.getCharacteristic(characteristic))
