@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Arduino/Genuino 101 CurieIMU Web Bluetooth Orientation Visualiser</title>
+    <title>Fidgetly Ctrl Pitch/Roll/Yaw Visualiser</title>
     <style>
         body{
             font-family: Helvetica;
@@ -15,17 +15,14 @@
     </style>
 </head>
 <body>
-    <h1>Arduino/Genuino 101 CurieIMU Web Bluetooth Orientation Visualiser</h1>
-    <ol>
-        <li>Follow the instructions <a href="https://github.com/w4ilun/web-bluetooth-curie-imu">here</a></li>
-        <li>Click <button id="connect">Connect</button></li>
-        <li>Visualize (and Profit)</li>
-    </ol>
+    <h1>Fidgetly Ctrl Pitch/Roll/Yaw Visualiser</h1>
+        Click here: <button id="connect">Connect</button>
+
     <canvas data-processing-sources="processing.pde"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.2/processing.min.js"></script>
     <script>
         //BLE
-        let service         = 0xBEEF;
+        let service         = 78adb061-470e-405d-a44d-817e559c8839;
         let characteristic  = 0xFEED;
         let byteLength      = 20;
         //IMU global vars for processing
@@ -39,9 +36,9 @@
 
         function connectBLE(){
             //BLE setup. Connect and get service/characteristic notifications
-            navigator.bluetooth.requestDevice({ filters: [{ services: [service] }] })
+            navigator.bluetooth.requestDevice({ filters: [{ services: '78adb061-470e-405d-a44d-817e559c8839' }] })
             .then(device => device.gatt.connect())
-            .then(server => server.getPrimaryService(service))
+            .then(server => server.getPrimaryService('service))
             .then(service => service.getCharacteristic(characteristic))
             .then(characteristic => {
                 return characteristic.startNotifications()
